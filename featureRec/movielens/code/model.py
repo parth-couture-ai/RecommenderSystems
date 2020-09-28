@@ -7,13 +7,13 @@ email: chenceshi@pku.edu.cn
 
 import os
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from time import time
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.metrics import roc_auc_score, log_loss
-from tensorflow.contrib.layers.python.layers import batch_norm as batch_norm
+from tensorflow.compat.v1.layers import batch_normalization as batch_norm
 
-
+tf.disable_eager_execution()
 
 '''
 The following two functions are adapted from kyubyong park's implementation of transformer

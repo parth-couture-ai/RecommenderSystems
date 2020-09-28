@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import pandas as pd
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from sklearn.metrics import make_scorer
 from sklearn.model_selection import StratifiedKFold
 from time import time
@@ -77,6 +77,11 @@ def _run_(args, run_cnt):
     Xi_valid_genre = np.load(path_prefix + '/valid_i_genre.npy')
     Xv_valid_genre = np.load(path_prefix + '/valid_x_genre.npy')    
     y_valid = np.load(path_prefix + '/valid_y.npy')
+    Xi_train = np.load(path_prefix + '/train_i_other.npy')
+    Xv_train = np.load(path_prefix + '/train_x_other.npy')
+    Xi_train_genre = np.load(path_prefix + '/train_i_genre.npy')
+    Xv_train_genre = np.load(path_prefix + '/train_x_genre.npy')
+    y_train = np.load(path_prefix + '/train_y.npy')
 
     is_continue = True
     for k in range(model.epoch):
@@ -88,11 +93,11 @@ def _run_(args, run_cnt):
             if not is_continue:
                 print('early stopping at epoch %d' % (k+1))
                 break
-            Xi_train = np.load(path_prefix + '/train_i_other.npy')
-            Xv_train = np.load(path_prefix + '/train_x_other.npy')
-            Xi_train_genre = np.load(path_prefix + '/train_i_genre.npy')
-            Xv_train_genre = np.load(path_prefix + '/train_x_genre.npy')
-            y_train = np.load(path_prefix + '/train_y.npy')
+            #Xi_train = np.load(path_prefix + '/train_i_other.npy')
+            #Xv_train = np.load(path_prefix + '/train_x_other.npy')
+            #Xi_train_genre = np.load(path_prefix + '/train_i_genre.npy')
+            #Xv_train_genre = np.load(path_prefix + '/train_x_genre.npy')
+            #y_train = np.load(path_prefix + '/train_y.npy')
 
             t1 = time()
             is_continue = model.fit_once(Xi_train, Xv_train, Xi_train_genre, Xv_train_genre, y_train, k+1,
